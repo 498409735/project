@@ -5,7 +5,272 @@
 #include <math.h>
 
 using namespace std;
-class Point{
+
+
+class Employee{
+public:
+    Employee( int num_tmp, string name_tmp):num(num_tmp){
+		this->name = name_tmp;
+		cout<<"构造函数"<<endl;
+	}
+    static int  cout(){
+        return allnum++;
+    }
+    void print();
+    ~Employee(){
+		cout<<"xi"<<endl;
+    }
+private:
+    int num;
+    string name;
+    static int allnum;
+};
+int Employee::allnum = 0;
+
+void Employee::print(){
+	cout<<"gonghao:"<<num<<endl;
+	cout<<"xingming:"<<name<<endl;
+    // cout<<"工号:"<<this->num<<endl;
+    // cout<<"姓名:"<<this->name<<endl;
+}
+
+int main()
+{
+	string tmp ="zhangsan";
+	int a =2020;
+    Employee pes1(a,tmp);
+    
+    return 0;
+}
+/* class Square{
+public:
+	Square(double length_tmp);
+	~Square();
+	double area();
+	Square(const Square square_other);
+private:
+	double length;
+};
+Square::Square(double length_tmp =1.0 ):length(length_tmp){
+	cout<<"创建正方形,边长="<<length<<endl;
+}
+Square::~Square(){
+	cout<<"删除正方形"<<endl;
+}
+Square::double area(){
+	double tmp = this->length*this->length;
+	return tmp;
+}
+Square::Square(const Square square_other){
+	
+	this->length = square_other.length;
+	cout<<"copy"<<endl;
+}
+int main(){
+	Square a(2);
+	cout<<"a area ="<<a.area()<<endl;
+	Square b = a;
+	cout<<"b area ="<<b.area()<<endl;
+	return 0;
+} */
+/* class Time;
+class Date{
+public:
+	Date(int y = 1970,int m =1,int d =1):year(y),month(m),day(d){
+		cout<<"gouzaoriqi"<<year<<":"<<month<<":"<<day<<endl;
+	}
+#ifdef test
+	//	friend void print(Date d,Time t);
+#else
+	void print(Time t);
+#endif
+private:
+	int year,month,day;
+};
+class Time{
+public:
+	Time(int h=0,int m=0,int s= 0):hour(h),minute(m),second(s){
+		cout<<"gouzao"<<hour<<":"<<minute<<":"<<second<<endl;
+	}
+	friend void print(Date d,Time t);
+private:
+	int hour,minute,second;
+};
+void print(Date d,Time t){
+ cout<<"Date:"<<d.year<<d.month<<d.day<<endl;
+ cout<<"Time:"<<t.hour<<t.minute<<t.second<<endl;
+}
+ int main(){
+  Date today(2020,1,10);
+  Time now(17,7,45);
+  print(today,now);
+  return 0;
+} */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*class Complex{
+public:
+	Complex(double x=0,double y =0):real(x),img(y){
+		cout<<"gouzao"<<"real="<<real<<"img="<<img<<endl;
+	}
+	void printcom(){
+		cout<<"real="<<real<<"img="<<img<<endl;
+	}
+private:
+	friend Complex add(Complex&c1,Complex&c2);
+	double real;
+	double img;
+};
+Complex add(Complex&c1,Complex&c2){
+	Complex com;
+	com.real = c1.real+c2.real;
+	com.img = c1.img +c2.img;
+	return com;
+}
+void fun(int&a,int&b){
+	a=a+1;
+	b=b+1;
+}
+int main(){
+	Complex c1(1,2),c2(2,3);
+	cout<<"****"<<endl;
+	Complex c3 = add(c1,c2);
+	c3.printcom();
+
+	int a =1,b=2;
+	//fun(a,b);
+	//cout<<"a=,b="<<a<<b<<endl;
+	return 0;
+}*/
+
+
+
+
+/*class A{
+public:
+	A(int a_tmp):a(a_tmp)
+	{
+		cout<<"gouzao"<<endl;
+	}
+	int geta()const{
+		cout<<"www"<<endl;
+		return a;
+	}
+	int geta(){
+		cout<<"PPP"<<endl;
+		return a;
+	}
+private:
+	int a;
+};
+int main(){
+	const A a(100);
+	cout<<a.geta()<<endl;
+	A b(102);
+	cout<<b.geta()<<endl;
+	return 0;
+
+
+}
+*/
+/*class mystring{
+public:
+	mystring( int data = 0)
+	:pdata(data){
+		cout<<"gouzao"<<endl;
+	}
+	mystring(const mystring &other){
+		this->pdata = other.pdata;
+		cout<<"fuzhi"<<endl;
+	}
+	int data(){
+		return pdata;
+	}
+	~mystring(){
+		cout<<"xigou"<<endl;
+	}
+private:
+	int pdata;
+};
+int main(){
+	mystring str(100);
+	cout<<str.data()<<endl;
+	mystring str2  =str;
+	cout<<str2.data()<<endl;
+	mystring str3(str);
+	cout<<str3.data()<<endl;
+	return 0;
+}*/
+/*class mystring{
+public:
+	mystring(const char* data=NULL){
+		if(data!=NULL){
+			this->pdata = new char[strlen(data)+1];
+			strcpy(this->pdata,data);
+		}else{
+			this->pdata = new char[1];
+		}
+		cout<<"构造"<<endl;
+	}
+	mystring(const mystring &other){
+		this->pdata = new char[strlen(other.pdata)+1];
+		strcpy(this->pdata,other.pdata);
+		cout<<"mystring复制构造"<<endl;
+	}	
+	~mystring(){
+		delete []pdata;
+		cout<<"mystring被析构了"<<endl;
+	}
+	char*data(){
+		return pdata;
+	}
+private:
+	char*pdata;
+};
+int main(){
+	mystring str("hello");
+	cout<<str.data()<<endl;
+	mystring str2 = str;
+	cout<<str2.data()<<endl;
+	mystring str3(str);
+	//str3 = str;
+	cout<<str3.data()<<endl;
+	return 0;
+}
+*/
+
+/*typedef struct Addr{
+	char* data;
+	int num;
+}addr_t;
+int main(){
+	addr_t t1,t2;
+	t1.data = (char*)calloc(100,sizeof(char));
+	strcpy(t1.data,"hello");
+	cout<<"t1.data="<<t1.data<<endl;
+	cout<<"t1.data addr ="<<&t1.data<<endl;
+	t2 = t1;
+	cout<<"t2.data="<<t2.data<<endl;
+	cout<<"t2.data addr ="<<&t2.data<<endl;
+	free(t1.data);
+	free(t2.data);
+	return 0;
+}*/
+/*class Point{
 public:
 	Point(int x_tmp=0,int y_tmp=0):
 	x(x_tmp),y(y_tmp)
@@ -57,9 +322,11 @@ private:
 int main(){
 	Point p1(0,0),p2(3,4);
 	Line l1(p1,p2);
+	cout<<p2.getx()<<endl;
 	cout<<l1.len()<<endl;
 	return 0;
 }
+*/
 /* class CAR{
 private:
 	string brand;
