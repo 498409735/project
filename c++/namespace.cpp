@@ -2,9 +2,133 @@
 #include <iomanip>
 #include <unistd.h>
 #include <string.h>
+#include <math.h>
 
 using namespace std;
-int fun(int a,int b){
+class Point{
+public:
+	Point(int x_tmp=0,int y_tmp=0):
+	x(x_tmp),y(y_tmp)
+	{
+		cout<<"构造点"<<x<<y<<endl;
+	}
+	void setxy(int x_tmp = 0,int y_tmp=0){
+		this->x = x_tmp;
+		this->y = y_tmp;
+	}
+	int getx()const{
+		return x;
+	}
+	int gety()const{
+		return y;
+	}
+private:
+	int x,y;
+};
+class Line{
+public:
+	Line(Point&start,Point&end):
+	start_point(start),end_point(end)
+	{
+		// start_point.setxy(start.getx(),start.gety());
+		// end_point.setxy(end.getx(),end.gety());
+		cout<<"构造"<<start_point.getx()<<","<<start_point.gety()<<"---"
+			<<end_point.getx()<<","<<end_point.gety()<<endl;
+	}
+	void set_point(Point&start,Point&end){
+		start_point.setxy(start.getx(),start.gety());
+		end_point.setxy(end.getx(),end.gety());
+	}
+	Point get_poit(string pos)const{
+		if(pos =="start"){return start_point;}
+		if(pos == "end"){return end_point;}
+		cout<<"start"<<start_point.getx()<<","<<start_point.gety()<<"------"
+			<<"end"<<end_point.getx()<<","<<end_point.gety()<<endl;
+	}
+	double len(){
+		int detax = pow(end_point.getx()-start_point.getx(),2);
+		int detay = pow(end_point.gety()- start_point.gety(),2);
+		return sqrt(detax+detay);
+	}
+private:
+	Point start_point;
+	Point end_point;
+};
+int main(){
+	Point p1(0,0),p2(3,4);
+	Line l1(p1,p2);
+	cout<<l1.len()<<endl;
+	return 0;
+}
+/* class CAR{
+private:
+	string brand;
+	int weight;
+public:
+	CAR(string brand_tmp,int weight_tmp);
+	~CAR();
+	void set(string brand_tmp,int weight_tmp);
+	void get();
+};
+CAR::CAR(string brand_tmp,int weight_tmp)
+:brand(brand_tmp),weight(weight_tmp)
+{
+	cout<<"构造车"<<endl;
+}
+CAR::~CAR(){
+	cout<<"析构"<<endl;
+}
+void CAR::get(){
+	cout<<this->brand<<this->weight<<endl;
+}
+void CAR::set(string brand_tmp,int weight_tmp){
+	this->brand = brand_tmp;
+	this->weight = weight_tmp;
+}
+int main(){
+	CAR jack("lis",99);
+	jack.get();
+	jack.set("jack",98);
+	jack.get();
+} */
+/* class STU{
+private:
+	char* name;
+	char gender;
+	float score;
+public:
+	STU(const char*name,char gender,float score);
+	void show()const;
+	~STU();
+};
+STU::STU(const char*name,char gender,float score)
+:gender(gender),score(score)
+{
+	if(name!=NULL){
+		this->name = new char[strlen(name)+1];
+	}else{
+		this->name = new char[1];
+	}
+	strcpy(this->name,name);
+	cout<<"构造生成"<<endl;
+}
+STU::~STU(){
+	cout<<this->name<<"析构"<<endl;
+	delete []this->name;
+}
+void STU::show()const{
+	cout<<"name:"<<name<<gender<<score<<endl;
+}
+
+int main(){
+	STU jack("jack",'F',89.2);
+	jack.show();
+	return 0;
+} */
+
+
+
+/*int fun(int a,int b){
 	return a*a+b*b;
 }
 double fun(double a ,double b){
@@ -13,7 +137,7 @@ double fun(double a ,double b){
 int main(){
 	cout<<"fun(2,3)="<<fun(2,3)<<endl;
 	cout<<"fun(2.2,3.3)="<<fun(2.2,3.3)<<endl;
-}
+}*/
 /* int add(int a =1,int b =2,int c=3){
 	return a+b+c;
 }
