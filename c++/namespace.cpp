@@ -6,8 +6,172 @@
 
 using namespace std;
 
+/* class Point{
+public:
+	Point(int x_tmp = 0,int y_tmp =0):x(x_tmp),y(y_tmp){
+		cout<<"new point ("<<this->x<<","<<this->y<<")"<<endl;
+	}
+	~Point(){
+		// cout<<"point delete"<<endl;
+	}
+	int x;
+	int y;
+};
+class Rectangle{
+public:
+	Rectangle(Point& lt_tmp,Point& rb_tmp):LTpoint(lt_tmp),RBpoint(rb_tmp){
+		cout<<"new rectangle initial:"<<endl;
+	}
+	~Rectangle(){
+		cout<<"rectangle delete"<<endl;
+	}
+	void set_LT(Point lt_tmp);
+	void set_RB(Point rb_tmp);
+	Point get_lt();
+	Point get_rb();
+	double area();
+private:
+	Point LTpoint;
+	Point RBpoint;
+};
+void Rectangle::set_LT(Point lt_tmp=(0,0)){
+	this->LTpoint = lt_tmp;
+}
+void Rectangle::set_RB(Point rb_tmp=(1,1)){
+	this->RBpoint = rb_tmp;
+}
+Point Rectangle::get_lt(){
+	Point tmp = this->LTpoint;
+	return tmp;
+}
+Point Rectangle::get_rb(){
+	Point tmp = this->RBpoint;
+	return tmp;
+}
+double Rectangle::area(){
+	int length = abs(this->LTpoint.x-this->RBpoint.x);
+	int high = abs(this->LTpoint.y-this->RBpoint.y);
+	double area = length* high;
+	return area;
+}
+int main(){
+	Point p1(1,1),p2(4,4);
+	Rectangle tom(p1,p2);
+	cout<<"area:"<<tom.area()<<endl;
+	tom.set_LT(Point(2,2));
+	cout<<"area:"<<tom.area()<<endl;
+	
+	Point p3 = tom.get_rb();
+	cout<<"p3 x="<<p3.x<<"y="<<p3.y<<endl;
+	return 0;
+} */
 
-class Employee{
+/* class STU{
+public:
+	int num;
+	float score;
+};
+void my_max(STU*st,int len){
+	int tmp =0;;
+	for(int i=0;i<len;i++){
+		
+		if(st[tmp].score<st[i].score)tmp =i;
+	}
+	cout<<"成绩最高学生为:"<<st[tmp].num<<"成绩:"<<st[tmp].score<<endl;
+}
+int main(){
+	int i;
+
+	STU student[10];
+	for( i=0;i<10;i++){
+		student[i].num = 190801+i;
+		student[i].score = rand()%100;
+	}
+	for(i=0;i<10;i++){
+		cout<<"学号:"<<student[i].num<<" 成绩:"<<student[i].score<<endl;
+	}
+	my_max(student,10);
+	return 0;
+} */
+/* class Employee{
+public:
+	Employee(string ,int);
+	~Employee(){
+		cout<<"employee delete"<<endl;
+	}
+	void print();
+	void count();
+private:
+	int num;
+	string name;
+	static int total;
+};
+ int Employee::total = 0;
+
+Employee::Employee(string name_tmp ="zhangsan",int num_tmp = 190801)
+:num(num_tmp),name(name_tmp){
+	this->total++;
+	cout<<"当前总人数:"<<this->total<<endl;
+	cout<<"new employee added"<<endl;
+}
+void Employee::print(){
+	cout<<"工号:"<<this->num<<" 姓名:"<<this->name<<endl;
+}
+void Employee::count(){
+	cout<<"总人数:"<<this->total<<endl;
+}
+int main(){
+	Employee zhangsan("zhangsan",190801);
+	zhangsan.print();
+	zhangsan .count();
+	Employee lisi("lisi",190802);
+	lisi.print();
+	lisi.count();
+	Employee wangwu("wangwu",190803);
+	wangwu.print();
+	wangwu.count();
+	return 0;
+} */
+/* class Clock{
+public:
+	Clock(short hour_tmp =8,short minute_tmp = 0,short second_tmp = 0)
+	:hour(hour_tmp),minute(minute_tmp),second(second_tmp){
+		cout<<"clock initial"<<endl;
+	}
+	~Clock(){
+		cout<<"clock delete"<<endl;
+	}
+	void showtime();
+	void count(short,short,short);
+private:
+	short hour;
+	short minute;
+	short second;
+};
+void Clock::showtime(){
+	cout<<"当前时间:"<<setw(2)<<this->hour<<":"<<setw(2)<<setfill('0')<<this->minute
+		<<":"<<setw(2)<<setfill('0')<<this->second<<endl;
+}
+void Clock::count(short hour_tmp = 0,short minute_tmp = 0,short second_tmp = 5){
+	this->hour += hour_tmp;
+	this->minute += minute_tmp;
+	this->second += second_tmp;
+	unsigned int tmp = hour_tmp*3600+minute_tmp*60+second_tmp;
+	sleep(tmp);
+	cout<<"时间到,请注意"<<endl;
+}
+int main(){
+	Clock tom(8,1,2);
+	tom.showtime();
+	tom.count(0,0,5);
+	tom.showtime();
+	for(int i=0;i<10;i++){
+		tom.count(0,0,1);
+		tom.showtime();
+	}
+	return 0;
+} */
+/* class Employee{
 public:
     Employee( int num_tmp, string name_tmp):num(num_tmp){
 		this->name = name_tmp;
@@ -41,13 +205,13 @@ int main()
     Employee pes1(a,tmp);
     
     return 0;
-}
+} */
 /* class Square{
 public:
 	Square(double length_tmp);
 	~Square();
 	double area();
-	Square(const Square square_other);
+	Square(const Square& );
 private:
 	double length;
 };
@@ -57,12 +221,15 @@ Square::Square(double length_tmp =1.0 ):length(length_tmp){
 Square::~Square(){
 	cout<<"删除正方形"<<endl;
 }
-Square::double area(){
+double Square:: area(){
 	double tmp = this->length*this->length;
 	return tmp;
 }
-Square::Square(const Square square_other){
-	
+Square::Square(const Square& square_other){
+	// if(square_other. == this){
+		// cout<<"invalved copy"<<endl;
+		// return;
+	// }
 	this->length = square_other.length;
 	cout<<"copy"<<endl;
 }
@@ -113,10 +280,10 @@ void print(Date d,Time t){
 
 
 
+         
 
 
-
-
+       
 
 
 
@@ -187,7 +354,7 @@ int main(){
 
 }
 */
-/*class mystring{
+/* class mystring{
 public:
 	mystring( int data = 0)
 	:pdata(data){
@@ -214,8 +381,8 @@ int main(){
 	mystring str3(str);
 	cout<<str3.data()<<endl;
 	return 0;
-}*/
-/*class mystring{
+} */
+/* class mystring{
 public:
 	mystring(const char* data=NULL){
 		if(data!=NULL){
@@ -224,7 +391,7 @@ public:
 		}else{
 			this->pdata = new char[1];
 		}
-		cout<<"构造"<<endl;
+		cout<<"mystring构造"<<endl;
 	}
 	mystring(const mystring &other){
 		this->pdata = new char[strlen(other.pdata)+1];
@@ -246,36 +413,24 @@ int main(){
 	cout<<str.data()<<endl;
 	mystring str2 = str;
 	cout<<str2.data()<<endl;
-	mystring str3(str);
-	//str3 = str;
-	cout<<str3.data()<<endl;
+	// mystring str3(str);
+	// str3 = str;
+	// cout<<str3.data()<<endl;
 	return 0;
-}
-*/
+} */
 
-/*typedef struct Addr{
-	char* data;
-	int num;
-}addr_t;
-int main(){
-	addr_t t1,t2;
-	t1.data = (char*)calloc(100,sizeof(char));
-	strcpy(t1.data,"hello");
-	cout<<"t1.data="<<t1.data<<endl;
-	cout<<"t1.data addr ="<<&t1.data<<endl;
-	t2 = t1;
-	cout<<"t2.data="<<t2.data<<endl;
-	cout<<"t2.data addr ="<<&t2.data<<endl;
-	free(t1.data);
-	free(t2.data);
-	return 0;
-}*/
-/*class Point{
+
+
+
+class Point{
 public:
 	Point(int x_tmp=0,int y_tmp=0):
 	x(x_tmp),y(y_tmp)
 	{
 		cout<<"构造点"<<x<<y<<endl;
+	}
+	~Point(){
+		cout<<"point delet"<<endl;
 	}
 	void setxy(int x_tmp = 0,int y_tmp=0){
 		this->x = x_tmp;
@@ -300,6 +455,9 @@ public:
 		cout<<"构造"<<start_point.getx()<<","<<start_point.gety()<<"---"
 			<<end_point.getx()<<","<<end_point.gety()<<endl;
 	}
+	~Line(){
+		cout<<"line deledete"<<endl;
+	}
 	void set_point(Point&start,Point&end){
 		start_point.setxy(start.getx(),start.gety());
 		end_point.setxy(end.getx(),end.gety());
@@ -322,11 +480,12 @@ private:
 int main(){
 	Point p1(0,0),p2(3,4);
 	Line l1(p1,p2);
+
 	cout<<p2.getx()<<endl;
 	cout<<l1.len()<<endl;
 	return 0;
 }
-*/
+
 /* class CAR{
 private:
 	string brand;

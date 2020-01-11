@@ -132,14 +132,14 @@ int main()
 
     return 0;
 }*/
-int Employee::allnum = 0;
+
 class Employee{
 public:
     Employee( int num, string name):num(num){
 		this->name = name;
 		cout<<"构造函数"<<endl;
 	}
-    static int  cout(){
+    static int  cunt(){
         return allnum++;
     }
     void print();
@@ -159,7 +159,7 @@ void Employee::print(){
     // cout<<"工号:"<<this->num<<endl;
     // cout<<"姓名:"<<this->name<<endl;
 }
-
+int Employee::allnum = 0;
 int main()
 {
 	string tmp ="zhangsan";
