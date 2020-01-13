@@ -6,6 +6,297 @@
 
 using namespace std;
 
+
+class Date{//0-11:1-12月;0-30:1-31号;
+public:
+	Date(const unsigned short year_tmp = 1970,const unsigned short month_tmp = 1,const unsigned short day_tmp =1)
+	:year(year_tmp),month(month_tmp),day(day_tmp){
+		this->month 	= this->month%12;
+		this->day 		= this->day%31;
+		cout<<"date initial:"<<this->year<<"-"<<this->month+1<<"-"<<this->day+1<<endl;
+	}
+	~Date(){
+		// cout<<"date delete"<<endl;
+	}
+	Date operator-(const Date& other){
+		Date tmp;
+		tmp.year 	= this->year - other.year;
+		tmp.month 	= this->month - other.month;
+		tmp.day		= this->day - other.day;
+		
+		tmp.month 	= tmp.month%12;
+		tmp.day		= tmp.day%31;
+		return tmp;
+	}
+	Date operator++(){
+		this->year++;
+		this->month++;
+		this->day++;
+		this->month 	= this->month%12;
+		this->day		= this->day%31;
+		return *this;
+	}
+	Date operator++(int){
+		Date tmp;
+		tmp.year 	= this->year++;
+		tmp.month 	= this->month++;
+		tmp.day		= this->day++;
+		
+		tmp.month 	= tmp.month%12;
+		tmp.day		= tmp.day%31;
+		this->month 	= this->month%12;
+		this->day		= this->day%31;
+		return tmp;
+	}
+	Date operator--(){
+		this->year--;
+		this->month--;
+		this->day--;
+		this->month 	= this->month%12;
+		this->day		= this->day%31;
+		return *this;
+	}
+	Date operator--(int){
+		Date tmp;
+		tmp.year 	= this->year--;
+		tmp.month 	= this->month--;
+		tmp.day		= this->day--;
+		cout<<"tmp:"<<tmp.year<<"-"<<tmp.month<<"-"<<tmp.day+1<<endl;
+		tmp.month 	= tmp.month%12;
+		tmp.day		= tmp.day%31;
+		cout<<"tmp67:"<<tmp.year<<"-"<<tmp.month<<"-"<<tmp.day+1<<endl;
+		this->month 	= this->month%12;
+		this->day		= this->day%31;
+		cout<<"Date:"<<this->year<<"-"<<this->month+1<<"-"<<this->day+1<<endl;
+		return tmp;
+	}
+	void show(){
+		cout<<"Date:"<<this->year<<"-"<<this->month+1<<"-"<<this->day+1<<endl;
+	}
+private:
+	unsigned short year;
+	unsigned short month;
+	unsigned short day;
+};
+int main(){	
+	Date d1(1995,12,30);
+	Date d2(1994,11,10);
+	Date d3 = d1-d2;
+	d3.show();
+	++d3;
+	d3.show();
+	d3 = d1++;
+	d3.show();
+	d3--;
+	d3.show();
+	return 0;
+}
+/* class Complex{
+public:
+	Complex(const int r = 0,const int i= 0)
+	:real(r),img(i){
+		cout<<"complex initial ("<<real<<","<<img<<")"<<endl;
+	}
+	Complex(const Complex&other){
+		if((other.real==this->real)&&(other.img==img))return;
+		real = other.real;
+		img = other.img;
+		cout<<"complex copy ("<<real<<","<<img<<")"<<endl;
+	}
+	Complex operator + (const Complex&other){
+		Complex tmp;
+		tmp.real = this->real+other.real;
+		tmp.img = this->img +other.img;
+		return tmp;
+	}
+	Complex operator - (const Complex&other){
+		Complex tmp;
+		tmp.real = this->real-other.real;
+		tmp.img = this->img -other.img;
+		return tmp;
+	}
+	Complex operator ++(int){
+		Complex tmp = *this;
+		this->real++;
+		this->img++;
+		return tmp;
+	}
+	Complex &operator ++(){//++c1 c1.operator++()
+		this->real++;
+		this->img++;
+		return *this;
+	}
+	Complex operator --(int){
+		Complex tmp = *this;
+		this->real--;
+		this->img--;
+		return tmp;
+	}
+	Complex &operator --(){
+		this->real--;
+		this->img--;
+		return *this;
+	}
+	void print()const{
+		cout<<"("<<real<<","<<img<<")"<<endl;
+	}
+	bool operator==(const Complex &tmp){
+		
+		if(this->real==tmp.real&&this->img==tmp.img)return true;
+		else return false;
+	}
+private: 
+	int real,img;
+};
+int main(){
+	Complex c1(1,1),c2(2,2);
+	Complex c3 = c1+c2;
+	c3.print();
+	c3 = c1-c2;
+	c3.print();
+	c3++;
+	c3.print();
+	
+	if(c3==c2){
+		cout<<"yes"<<endl;
+	}else {
+		cout<<"no"<<endl;
+	}
+	bool a =c3==c1;
+	cout<<a<<endl;
+	c3.operator++();
+	c3.print();
+	++c3;
+	c3.print();
+	c3--;
+	c3.print();
+	--c3;
+	c3.print();
+	return 0;
+} */
+/* class STU{
+public:
+	STU(const int id_tmp,const float score_tmp)
+	:id(id_tmp),score(score_tmp){
+		cout<<"student added id ="<<this->id<<" score ="<<this->score<<endl;
+	}
+	float get_score()const{
+		return score;
+	}
+	int get_id()const{
+		return id;
+	}
+private:
+	int id;
+	float score;
+};
+void my_max( STU*p,int n){
+	STU *a =p;
+	for(int i=0;i<n;i++){
+		if(p->get_score()<a->get_score()){
+			p = a;
+		}
+		a++;
+	}
+	cout<<"the max is:"<<p->get_score()<<"ID:"<<p->get_id()<<endl;
+}
+int main(){
+	STU stu[3] = {STU(1000,80),STU(1001,90),STU(1002,87)};
+	my_max(stu,3);
+	return 0;
+} */
+/* class Employee{
+public:
+	Employee(const int id,const string name_tmp)
+	:m_id(id),name(name_tmp){
+		total++;
+		
+	}
+	Employee(const Employee&other){
+		if(other.m_id== this->m_id)return;
+		this->name = other.name;
+	}
+	~Employee(){
+		cout<<"删除员工"<<endl;
+	}
+	void show(){
+		cout<<"工号:"<<this->m_id<<" 姓名:"<<this->name<<",总人数:"<<this->total<<endl;
+	}
+	static void count(){
+		cout<<"总人数:"<<total<<endl;
+	}
+private:
+	int m_id;
+	string name;
+	static int total;
+};
+int Employee::total = 0;
+int main(){
+	Employee zhangsan(100,"zhangsan");
+	zhangsan.show();
+	zhangsan.count();
+	return 0;
+} */
+/* class Girl{
+public:
+	
+	Girl(string name_tmp ,string wechat_tmp,unsigned short age_tmp =18,unsigned int selary_tmp =200)
+	:age(age_tmp),selary(selary_tmp)
+	{
+		this->name = name_tmp;
+		this->wechat = wechat_tmp;
+		cout<<"girl initial"<<endl;
+	}
+	~Girl(){
+		cout<<"girl delete"<<endl;
+	}
+	void myinfo(){
+		cout<<this->name<<" "<<this->age<<" "<<this->selary<<" "<<this->wechat<<endl;
+	}
+	friend class Boy;
+private:
+	unsigned short age;
+	string name;	
+	string wechat;
+	unsigned int selary;	
+};
+class Boy{
+public:
+	// class Girl;
+	
+	Boy(string name_tmp ,string wechat_tmp,unsigned short age_tmp =18,unsigned int selary_tmp =200)
+	:age(age_tmp),selary(selary_tmp)
+	{
+		this->name = name_tmp;
+		this->wechat = wechat_tmp;
+		cout<<"boy initial"<<endl;
+	}
+	~Boy(){
+		cout<<"boy delete"<<endl;
+	}
+	void myinfo(){
+		cout<<this->name<<" "<<this->age<<" "<<this->selary<<" "<<this->wechat<<endl;
+	}
+	void mygirlinfo(Girl& gl);
+	
+private:
+	unsigned short age;
+	string name;	
+	string wechat;
+	unsigned int selary;
+	
+};
+void Boy::mygirlinfo(Girl& gl){
+	cout<<"girlfriend selary is"<<gl.selary<<endl;
+}
+int main(){
+	Boy jack("jack","444",18,200);
+	Girl rose("rose","555",17,200);
+	rose.myinfo();
+	jack.myinfo();
+	jack.mygirlinfo(rose);
+	return 0;
+} */
 /* class Point{
 public:
 	Point(int x_tmp = 0,int y_tmp =0):x(x_tmp),y(y_tmp){
@@ -422,7 +713,7 @@ int main(){
 
 
 
-class Point{
+/* class Point{
 public:
 	Point(int x_tmp=0,int y_tmp=0):
 	x(x_tmp),y(y_tmp)
@@ -484,7 +775,7 @@ int main(){
 	cout<<p2.getx()<<endl;
 	cout<<l1.len()<<endl;
 	return 0;
-}
+} */
 
 /* class CAR{
 private:
