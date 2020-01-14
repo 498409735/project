@@ -6,8 +6,207 @@
 
 using namespace std;
 
+/*  class Date{
+public:
+	Date(const int y = 1978,const int m = 1,const int d =1)
+	:year(y),month(m),day(d){
+		cout<<"构造日期"<<this->year<<"-"<<this->month<<"-"<<this->day<<endl;
+	}
+	Date(const Date&other){
+		if((other.year==this->year)&&(other.month==this->month)&&(other.day==this->day))return;
+		this->year = other.year;this->month = other.month;this->day = other.day;
+		cout<<"copy "<<this->year<<"-"<<this->month<<"-"<<this->day<<endl;
+	}
+	void show()const{
+		cout<<"日期为:"<<year<<"-"<<month<<"-"<<day<<endl;
+	}
+  	// Date operator++(){//这几行有问题,i++应该是先赋值后运算,这几行无法完成
+		// cout<<"++i"<<endl;
+		// Date tmp = *this;
+		// this->year ++;this->month++;this->day++;
+		// return tmp;
+	// }
+	// Date&operator++(int){
+		// cout<<"i++"<<endl;
+		// this->year++;this->month++;this->day++;
+		// return *this;
+	// }  
+	Date &operator++(){
+		cout<<"++i"<<endl;
+		this->year++;this->month++;this->day++;
+		return *this;
+	}
+	Date operator++(int){
+		cout<<"i++"<<endl;
+		Date tmp = *this;
+		this->year ++;this->month++;this->day++;
+		return tmp;
+	} 
+	~Date(){
+		cout<<"date delete"<<endl;
+	}
+private:
+	int year,month,day;
+		
+};
+int main(){
+	Date d1(1970,2,10);
+	Date d2(1966,1,3);
+	Date d3;
+	d3 = d1++;
+	cout<<"d3:"<<endl;
+	d3.show();
+	cout<<"d1:"<<endl;
+	d1.show();
+	d3 = ++d1;
+	cout<<"d3:"<<endl;
+	d3.show();
+	cout<<"d1:"<<endl;
+	d1.show();
+	return 0;
+}   */
+class Mystring{
+public:
+	Mystring(const char* str = NULL){
+		if(str==NULL){
+			pData = new char[1];
+		}else{
+			pData = new char[strlen(str)+1];
+			strcpy(pData,str);
+		}
+		cout<<"mystring initial"<<endl;
+	}
+	Mystring(const Mystring&other){
+		if(strcmp(this->pData,other.pData)==0)return;
+		this->pData = new char[strlen(other.pData)+1];
+		strcpy(this->pData,other.pData);
+		cout<<"copy string"<<endl;
+	}
+	char *getData()const{
+		cout<<this->pData<<endl;
+		return pData;
+	}
+	Mystring operator +(const Mystring&other){
+		Mystring tmp;
+		delete []tmp.pData;
+		int len = strlen(this->pData)+strlen(other.pData)+1;
+		tmp.pData = new char[len];
+		strcpy(tmp.pData,this->pData);
+		strcat(tmp.pData,other.pData);
+		return tmp;
+	}
+	Mystring&operator=(const Mystring&other){
+		strcpy(this->pData,other.pData);
+		return *this;
+	}
+	char operator[](int n){
+		return this->pData[n];
+	}
+	Mystring operator +=(const Mystring&other){
+		Mystring tmp;
+		delete []tmp.pData;
+		int len = strlen(this->pData)+strlen(other.pData)+1;
+		tmp.pData = new char[len];
+		strcpy(tmp.pData,this->pData);
+		strcat(this->pData,other.pData);
+		return tmp;
+	}
+	bool operator>(const Mystring&other){
+		if(strcmp(this->pData,other.pData)>0)return true;
+		else return false;
+	}
+	bool operator>=(const Mystring&other){
+		if(strcmp(this->pData,other.pData)<0)return false;
+		else return true;
+	}
+	bool operator<(const Mystring&other){
+		if(strcmp(this->pData,other.pData)<0)return true;
+		else return false;
+	}
+	bool operator<=(const Mystring&other){
+		if(strcmp(this->pData,other.pData)>0)return false;
+		else return true;
+	}
+	~Mystring(){
+		cout<<"mystring delete"<<endl;
+		delete []pData;
+	}
+private:
+	char* pData;
+};
+int main(){
+	Mystring str1("hello");
+	Mystring str2("eorld");
+	Mystring str3 = str1+str2;
+	str1.getData();
+	str2.getData();
+	str3.getData();
+	str3+=str2;
+	str3.getData();
+	cout<<str3[2]<<endl;
+	bool tmp = str1>str2;
+	cout<<"str1>str2 ? "<<tmp<<endl;
+	tmp = str1>=str2;
+	cout<<"str1>=str2 ? "<<tmp<<endl;
 
-class Date{//0-11:1-12月;0-30:1-31号;
+}
+/* class Cube{
+public:
+	Cube(const unsigned int length_tmp =1,const unsigned int width_tmp =1,const unsigned int high_tmp=1)
+	:length(length_tmp),width(width_tmp),high(high_tmp){
+		cout<<"Cube initial "<<"length:"<<this->length<<" width:"<<this->width<<" high:"<<this->high<<endl;
+	}
+	~Cube(){
+		cout<<"Cube delete"<<endl;
+	}
+	bool operator<(const Cube&other){
+		if(this->length*this->width*this->high<other.length*other.width*other.high)return true;
+		else return false;
+	}
+private:
+	unsigned int length;
+	unsigned int width;
+	unsigned int high;
+};
+int main(){
+	Cube c1(2,3,4);
+	Cube c2(3,4,5);
+	bool tmp =c1<c2;
+	cout<<tmp<<endl;
+	tmp = c2<c1;
+	cout<<tmp<<endl;
+	return 0;
+	
+} */
+/* class Worker{
+public:
+	Worker(string name_tmp = "zhangsan",string job_tmp = "programer")
+	:name(name_tmp),job(job_tmp){
+		
+		cout<<"new worker added"<<this->name<<" "<<this->job<<endl;
+	}
+	~Worker(){
+		cout<<"worker delete"<<endl;
+	}
+	bool operator!=(const Worker&other){
+		if(this->name==other.name&&this->job==other.job)return false;
+		else return true;
+	}
+private:
+	string name;
+	string job;
+};
+int main(){
+	Worker w1("zhangsan","programer");
+	Worker w2("zhangsan","programer");
+	Worker w3("lisi","teacher");
+	bool tmp = w1!=w2;
+	cout<<tmp<<endl;
+	tmp = w1!=w3;
+	cout<<tmp<<endl;
+	return 0;
+} */
+/* class Date{//0-11:1-12月;0-30:1-31号;
 public:
 	Date(const unsigned short year_tmp = 1970,const unsigned short month_tmp = 1,const unsigned short day_tmp =1)
 	:year(year_tmp),month(month_tmp),day(day_tmp){
@@ -61,13 +260,11 @@ public:
 		tmp.year 	= this->year--;
 		tmp.month 	= this->month--;
 		tmp.day		= this->day--;
-		cout<<"tmp:"<<tmp.year<<"-"<<tmp.month<<"-"<<tmp.day+1<<endl;
 		tmp.month 	= tmp.month%12;
 		tmp.day		= tmp.day%31;
-		cout<<"tmp67:"<<tmp.year<<"-"<<tmp.month<<"-"<<tmp.day+1<<endl;
 		this->month 	= this->month%12;
 		this->day		= this->day%31;
-		cout<<"Date:"<<this->year<<"-"<<this->month+1<<"-"<<this->day+1<<endl;
+
 		return tmp;
 	}
 	void show(){
@@ -85,12 +282,10 @@ int main(){
 	d3.show();
 	++d3;
 	d3.show();
-	d3 = d1++;
-	d3.show();
 	d3--;
 	d3.show();
 	return 0;
-}
+} */
 /* class Complex{
 public:
 	Complex(const int r = 0,const int i= 0)
@@ -564,20 +759,6 @@ void print(Date d,Time t){
   print(today,now);
   return 0;
 } */
-
-
-
-
-
-
-
-         
-
-
-       
-
-
-
 
 
 /*class Complex{

@@ -12,7 +12,154 @@
 #include<unistd.h>
 
 using namespace std;
+#include<iostream>
+#include<string.h>
+//#include<stdlib.h>
+using namespace std;
+   
+class Mystring{
+private:
+    char* m_data;
+public:
+    Mystring(const char* str=0){
+        if(str == NULL){
+            m_data = new char[1];
+        }else{
+            m_data = new char[strlen(str)+1];
+            strcpy(m_data,str);
+        }
+        cout << "构建了字符串:" << m_data << endl;
+    }
+    Mystring(const Mystring &rhs){
+        if(this->m_data == rhs.m_data){
+            return;
+        }else{
+            strcpy(this->m_data,rhs.m_data);
+        }
+        cout << "字符串被拷贝了" << endl;
+    }
+    void print(){
+        cout << "当前字符串为:" << m_data << endl;
+    }
+    ~Mystring(){
+        cout << this->m_data << "被析构了" << endl;
+    }
+    char* getstr(){
+        return m_data;
+    }
 
+    Mystring operator+(const Mystring &other){
+        cout << "+" << endl;
+        Mystring m;
+        delete []m.m_data;
+        int len = strlen(this->m_data) + strlen(other.m_data) +1;
+        m.m_data = new char[len];
+        strcpy(m.m_data,this->m_data);
+        strcat(m.m_data,other.m_data);
+        return m;
+    }
+    Mystring &operator+=(const Mystring &other){
+        cout << "+=" << endl;
+        Mystring m;
+        delete []m.m_data;
+        int len = strlen(this->m_data) + strlen(other.m_data) +1;
+        m.m_data = new char[len];
+        strcpy(m.m_data,this->m_data);
+        strcat(m.m_data,other.m_data);
+        strcpy(this->m_data,m.m_data);
+        return *this;
+    }
+    Mystring &operator=(const Mystring &other){
+        cout << '=' << endl;
+        strcpy(this->m_data,other.m_data);
+        return *this;
+    }
+    char operator[](int i){
+        cout << "[]" << endl;
+        int len = strlen(this->m_data);
+        if(i>=len){
+            return 0;
+        }else{
+            return (char)(this->m_data[i]);
+        }
+    }
+    bool operator>(const Mystring &other){
+        if(strcmp(this->m_data,other.m_data)>0){
+            return true;
+        }else{
+            return false;
+        }
+    }
+    bool operator<(const Mystring &other){
+        if(strcmp(this->m_data,other.m_data)<0){
+            return true;
+        }else{
+            return false;
+        }
+   
+    }
+    bool operator>=(const Mystring &other){
+        if(strcmp(this->m_data,other.m_data)>=0){
+            return true;
+        }else{
+            return false;
+        }
+   
+    }
+    bool operator<=(const Mystring &other){
+        if(strcmp(this->m_data,other.m_data)<=0){
+            return true;
+        }else{
+            return false;
+        }
+    }
+    bool operator==(const Mystring &other){
+        if(strcmp(this->m_data,other.m_data)==0){
+            return true;
+        }else{
+            return false;
+        }
+    }   
+};
+
+int main(){
+    Mystring m1("hello"),m2("world");
+    Mystring m3;
+    m3 = m1 + m2;
+    cout << "m1+m2 = " << m3.getstr() << endl;
+    m1 += m2;
+    cout << "m1+=m2 = " << m1.getstr() << endl;
+    m1 = m2;
+    cout << "m1=m2 = " << m1.getstr() << endl;
+    m1[3];
+    cout << "m1[3] = " << m1[3] << endl;
+    if(m1.operator>(m2)){
+        cout << "m1>m2" << endl;
+    }else{
+        cout << "m1<m2" << endl;
+    }
+    if(m3.operator<(m2)){
+        cout << "m3<m2" << endl;
+    }else{
+        cout << "m1>m2" << endl;
+    }
+    if(m1.operator>=(m2)){
+        cout << "m1>=m2" << endl;
+    }else{
+        cout << "m1<m2" << endl;
+    }
+    if(m1.operator<=(m2)){
+        cout << "m1<=m2" << endl;
+    }else{
+        cout << "m1>m2" << endl;
+    }
+    if(m1.operator==(m2)){
+        cout << "m1==m2" << endl;
+    }else{
+        cout << "m1!=m2" << endl;
+    }
+    return 0;
+}
 /*class Square{
 public:
     Square(double a)
@@ -133,7 +280,7 @@ int main()
     return 0;
 }*/
 
-class Employee{
+/* class Employee{
 public:
     Employee( int num, string name):num(num){
 		this->name = name;
@@ -167,4 +314,4 @@ int main()
     Employee pes1(a,tmp);
     
     return 0;
-}
+} */
