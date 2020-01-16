@@ -1,0 +1,29 @@
+
+
+
+
+ls
+
+
+
+end
+ret=2
+sh: 1: aa: not found
+ret=32512
+cat: myshe: No such file or directory
+ret=256
+sh: 1: ll.txt: not found
+ret=32512
+123.c
+1.txt
+2.txt
+321.c
+4.txt
+6.txt
+a.out
+myshell.txt
+test1.c
+test2.c
+ret=0
+sh: 1: aaa: not found
+ret=32512
